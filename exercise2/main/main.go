@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/manedurphy/gophercises/exercise2"
 )
 
 func main() {
@@ -13,7 +15,7 @@ func main() {
 		"/urlshort-godoc": "https://godoc.org/github.com/gophercises/urlshort",
 		"/yaml-godoc":     "https://godoc.org/gopkg.in/yaml.v2",
 	}
-	// mapHandler := urlshort.MapHandler(pathsToUrls, mux)
+	mapHandler := exercise2.MapHandler(pathsToUrls, mux)
 
 	// Build the YAMLHandler using the mapHandler as the
 	// fallback
