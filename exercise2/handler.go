@@ -1,4 +1,4 @@
-package urlshort
+package exercise2
 
 import (
 	"net/http"
