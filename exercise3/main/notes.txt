@@ -1,0 +1,14 @@
+parsing json using marshal
+
+content, err := io.ReadAll(file)
+	if err != nil {
+		fmt.Println("ERROR: ", err)
+		return
+	}
+
+	jsonMap := make(map[string]Chapter)
+
+	json.Unmarshal(content, &jsonMap)
+
+	fmt.Println(string("JSON UNMARSHAL\n"))
+	fmt.Printf("%+v\n", jsonMap)
