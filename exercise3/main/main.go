@@ -4,6 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/manedurphy/gophercises/exercise3"
 )
 
 func main() {
@@ -15,7 +17,7 @@ func main() {
 		panic(err)
 	}
 
-	story, err := storyJson.GetDecodedJson(file)
+	story, err := exercise3.GetDecodedJson(file)
 	if err != nil {
 		panic(err)
 	}

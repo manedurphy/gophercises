@@ -1,4 +1,4 @@
-package storyJson
+package exercise3
 
 import (
 	"encoding/json"
