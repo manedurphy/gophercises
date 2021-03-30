@@ -24,7 +24,10 @@ type Option struct {
 
 type handler struct {
 	s Story
+	t *template.Template
 }
+
+var tpl *template.Template = template.Must(template.New("").Parse(htmlTemplate))
 
 func GetDecodedJson(file *os.File) (Story, error) {
 	d := json.NewDecoder(file)
@@ -36,12 +39,14 @@ func GetDecodedJson(file *os.File) (Story, error) {
 	return story, nil
 }
 
-func NewHandler(s Story) http.Handler {
-	return handler{s}
+func NewHandler(s Story, t *template.Template) http.Handler {
+	if t == nil {
+		t = tpl
+	}
+	return handler{s, t}
 }
 
 func (h handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	tpl := template.Must(template.New("").Parse(htmlTemplate))
 	path := strings.TrimSpace(r.URL.Path)
 
 	if path == "" || path == "/" {
