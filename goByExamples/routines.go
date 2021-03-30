@@ -46,3 +46,57 @@ func Sample() {
 	fmt.Println("Box 10")
 	time.Sleep(time.Second) // without this the function running the main logic finishes before the go routine, and exits before it can log
 }
+
+func task(arg int) {
+	fmt.Println("Box", arg)
+}
+
+func RoutineLoop() {
+	var N int = 100
+
+	for i := 0; i < N; i++ {
+		task(i)
+	}
+
+}
+
+func GoRoutineLoop() {
+	var N int = 100
+
+	acknowledgeChannel := make(chan bool, 100)
+
+	for i := 0; i < N; i++ {
+		go func(i int) {
+			task(i)
+			acknowledgeChannel <- true
+		}(i)
+	}
+
+	for i := 0; i < N; i++ {
+		<-acknowledgeChannel
+	}
+}
+
+func Select() {
+	c1 := make(chan string)
+	c2 := make(chan string)
+
+	go func() {
+		time.Sleep(5 * time.Second)
+		c1 <- "one"
+	}()
+
+	go func() {
+		time.Sleep(2 * time.Second)
+		c2 <- "two"
+	}()
+
+	for i := 0; i < 2; i++ {
+		select {
+		case msg1 := <-c1:
+			fmt.Println("received", msg1)
+		case msg2 := <-c2:
+			fmt.Println("received", msg2)
+		}
+	}
+}
