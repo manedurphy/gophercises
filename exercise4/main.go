@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/manedurphy/gophercises/exercise4/links"
+	links "github.com/manedurphy/gophercises/exercise4/link"
 )
 
 var html = `
 <html>
 <body>
-  <h1>Hello!</h1>
-  <a href="/other-page">A link to another page</a>
+	<h1>Hello!</h1>
+	<a href="/first-page">A link to a <span>page</span></a>
+	<a href="/other-page">A link to another page</a>
 </body>
 </html>
 `
@@ -24,5 +25,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(links)
+	fmt.Printf("%+v\n", links)
 }
